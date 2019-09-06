@@ -13,10 +13,11 @@ public class Knight : MonoBehaviour {
     public float direction = 1f;
     
     private void Start() {
-        if (transform.rotation.y.ToString().Equals("1")) {
-            direction *= -1f;
+        if (speed > 0) {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        } else if (speed < 0) {
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
-        animator.SetFloat("velocity", 2f);
     }
 
     // Update is called once per frame
@@ -29,7 +30,8 @@ public class Knight : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        rb.velocity = new Vector2(speed * direction, 0);
+        rb.velocity = new Vector2(speed, 0);
+        animator.SetFloat("velocity", Mathf.Abs(rb.velocity.x));
 
         if (isDead) {
             rb.velocity = Vector2.zero;

@@ -5,12 +5,13 @@ public class Player : MonoBehaviour
 
     public float speed;
     public Animator animator;
+    public Transform canvasBoard;
 
     float xSpeed;
     bool isFiring;
 
     void Start() {
-
+        speed = 10f;
     }
 
     private void Update() {
@@ -27,8 +28,10 @@ public class Player : MonoBehaviour
         xSpeed = Input.GetAxis("Horizontal") * speed;
         if (xSpeed > 0) {
             transform.eulerAngles = new Vector3(0, 0, 0);
+            canvasBoard.eulerAngles = new Vector3(0, 0, 0);
         } else if (xSpeed < 0) {
             transform.eulerAngles = new Vector3(0, 180, 0);
+            canvasBoard.eulerAngles = new Vector3(0, 0, 0);
         }
 
         Vector3 movement = new Vector3(xSpeed, 0, 0);
